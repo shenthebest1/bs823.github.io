@@ -36,13 +36,14 @@ special(1000)
 ```
 <br />
 
-## Explanation for my solution: 
+### Explanation for my solution: 
 firstly, I created a function named `speical` and we have a random variable `s` in the parenthesis mark. We need to use two for loop to find the special value for each side of this triangle, and all sides should satisfy the conditions we have set. 
 
 The first for loop is looking for the shortest side `a` which ranges from 1 to s, and the second for loop is looking for the second longest side `b` which ranges from a+1 to s-a, and the first for loop contains the second for loop because side a and side b are in the same triangle. 
 
 It is obvious that `c = s - a - b ` and we set the Pythagorean theorem function. After finding the side `a`, `b`, `c` we finally let the function return the product of abc.
 
+<br />
 
 # Question 2 (Euler problem 16)
 
@@ -65,9 +66,11 @@ def digit(num):
     """
 
         mid = num % 10
+        
         """
         get each digit from num as remainders.
         """
+    
         total = total + mid
         num = num//10
     return total
@@ -76,7 +79,7 @@ digit(2**1000)
 
 ```
 
-## Explanation for my solution: 
+### Explanation for my solution: 
 firstly, I created a function named `digit` and we have a random variable `num` in the parenthesis mark. I set the variable `total` eqaul to 0 to accumulate the sum of all the digits. If the input value `num` is greater or equal to 1 then it will keep the while loop running.
 
 Inside of the while loop, we need to get the number on each digit so I use `mid = num % 10` to get remainder and then accumlate all the remainder which is the same as get the sum of digits of random variable `num`, at the end of each round of the while loop, I divide `num` by 10 so we can get the digits one by one.
@@ -99,17 +102,18 @@ part of solution code:
             elif j == 0:
                 val = par[i][j + 1]
                 """
-                if j equals to 0 here, I will do to partition as par[i][j+1]
+                if j equals to 0 here, I will do the partition as par[i][j+1]
                 """
             else:
                 val = par[i][j + 1] + par[i - j][j]
                 """
-                On the 
+                Otherwise, I will do the partition as 
+                par[i][j + 1] + par[i - j][j]
                 """
             par[i][j] = val
 ```
 
-## Explanation for my solution: 
+### Explanation for my solution: 
 firstly, I created a function named `compute` and we have a random variable `limit` in the parenthesis mark. I set up an empty list for `par` at the beginning. The first for loop is to set random variable `i` from range 0 to `limit + 1`, and the second for loop to set `j` from range 0 to reversed `limit +1` 
 
 And the above combination of if, elif, else is to make the partition algorithm. I will just use an example to illustrate how this code works.
