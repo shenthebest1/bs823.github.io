@@ -151,3 +151,103 @@ If we use 1 to let the algorithm expand then have the following as our algorithm
 
 Finally, we use the same method to get the result of 100, so we get the result is 190569291. This is a very complex loop to get the result. 
 
+
+
+<br />
+<br />
+<br />
+
+# HW 2
+
+### Question: 
+Find the first 10-digit prime in the decimal expansion of 17π.
+
+-Write a function to generate an arbitrary large expansion of a mathematical expression like π. Hint: You can use the standard library decimal or the 3rd party library sympy to do this
+<br />
+-Write a function to check if a number is prime. Hint: See Sieve of Eratosthenes
+<br />
+-Write a function to generate sliding windows of a specified width from a long iterable (e.g. a string representation of a number)
+
+```
+import numpy
+import math
+import sympy as sym
+
+def prime(a):
+    """First check number a through the following conditions  """
+
+    if a == 2: return True
+    if a % 2 == 0: return False
+    if a < 2: return False
+    i = 2
+    """Set n = a^2 +1 for the following algortithms """
+    
+    n = math.sqrt(a) + 1
+    
+    """Run through the while loop here as consition i<n and check whether the input is a prime number"""
+
+    while(i < n):
+        if a % i == 0:
+            return False
+        i += 1
+    return True
+
+    """This function finishs to check the input number a is prime or not"""
+
+```
+
+### explanation: This is the first function I created to check a number is prime or not, since we need to find a 10 digits number inside of the 17pi decimal. So this function can help us to check whether the 10 digits number is prime or not.  
+
+<br />
+<br />
+
+```
+
+def expa(nu, dig):
+    '''this function is to generate an arbitrary large expansion of a mathematical expression the nu should be a 
+    mathematical expression and dig is number of digits we want'''
+
+    if dig <= 0:
+        return ValueError("dig must be larger than 0")
+
+    """Use evalf to expand our mathematical expression to dig+1 digits """
+   
+    a = nu.evalf(dig+1)
+
+   
+    b = str(a)[0:dig+1]
+    return b
+
+
+```
+
+### explantion: The second function I created is for the use of expanding mathematical expression that has large number of dights. Since we are dealing with pi in this problem, then we need to expand the digits for pi. This function can expand a mathematical expression with the desired digits we want. So it is very helpful for us to use it after. 
+
+<br />
+<br />
+
+```
+def prime_pi(p,dig):
+
+"""We run though a for loop to go through the decimal number in 17*pi   """
+
+    for i in range(len(expa(p,dig))):
+
+    """Since we want a 10 digits number so we set the length of the expanded math expression as 10 """
+
+        x = int(p[i:10+i])
+
+        """Use the prime function that we have created before to check whether the 10 digits number is prime or not"""
+
+        if prime(x):
+            return  x
+
+            """Finally, return the first 10-digit prime in the decimal expansion of 17π"""
+```
+
+### explantion: This function is combines all the function we have created before. We use the expa function to get the decimal expansion for the 17π; and then slide all the 10 digits number from the expansion and check if it is a prime number. We have set a for loop to run through all the 10 digits number. And the for loop will stop if it finds the first 10 digits number which is a prime number. 
+
+<br />
+
+### Answer: The first 10-digit prime in the decimal expansion of 17π is 8649375157 from my code. 
+
