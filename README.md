@@ -1,13 +1,13 @@
-Biostat 823
+# Biostat 823
 <br />
 Name: Jiajie Shen
 <br />
-HW 1
-<br />
+
 `blog information`: This blog is the property of Jiajie Shen and the blog contains the homework solution and explanation for the class of Biostatistics 823 of Fall 2021.
 
 <br />
 
+# HW1
 # Question 1 (Euler problem 9)
 
 
