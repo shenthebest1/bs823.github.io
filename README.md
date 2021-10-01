@@ -251,3 +251,136 @@ def prime_pi(p,dig):
 
 ### Answer: The first 10-digit prime in the decimal expansion of 17π is 8649375157 from my code. 
 
+
+
+
+
+# HW3
+
+### Question: Create 3 informative visualizations about malaria using Python in a Jupyter notebook, starting with the data sets at the website https://github.com/rfordatascience/tidytuesday/tree/master/data/2018/2018-11-13
+
+<br />
+<br />
+
+First, I import all the packages that I will use for my plotting later. And then I read the 3 datasets by using pd.read_csv. On the GitHub, I click the raw option for each datasets, and then copied the website so pandas can read the data. 
+
+`malaria_deaths.csv` will be named data1 here; `malaria_deaths_age.csv` will be named data2 here and finally `malaria_inc.csv` will be data3 here for easy distinguish. 
+
+```
+import pandas as pd
+import io
+import requests
+from toolz import pipe
+import matplotlib.pyplot as plt
+import plotly.io as pio
+import plotly.express as px
+import plotly.offline as py
+import altair as alt
+
+
+url = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-11-13/malaria_deaths.csv"
+
+data1 = pd.read_csv(url, error_bad_lines=False)
+
+
+
+url2 = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-11-13/malaria_deaths_age.csv"
+
+data2 = pd.read_csv(url2, error_bad_lines=False)
+
+
+url3 = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-11-13/malaria_inc.csv"
+
+data3 = pd.read_csv(url3, error_bad_lines=False)
+```
+
+<br />
+
+Next, I will generate plot for each of the dataset. The following code below is to generate a `scatterplot` of the first dataset `malaria_deaths.csv` and the illustration of the graph will be given. 
+
+
+
+```
+"""I use the px.scatter to generate the scatter plot """
+fig = px.scatter(data1, 
+                 x="Year", 
+                 y="Entity", 
+                 
+                 """I put x-axis as all the years amd y-axis as all different countries"""
+                 
+                 size="Deaths - Malaria - Sex: Both - Age: Age-standardized (Rate) (per 100,000 people)",
+                 
+                 """I set the size is for the death rate of malaria so we can easily tell from the plot to determine the size of death rate from Malaria for each country"""
+                 
+                 color = "Entity")
+                """I set the color is based on the countries, so each country can get a different color which make the 
+                plot more reader friednly."""
+fig
+
+"""Output fig in the following """
+
+```
+
+
+![newplot](https://user-images.githubusercontent.com/78027134/135559223-bf2e8384-bec0-4d96-b884-57c621fc6f85.png)
+
+<br />
+
+### explanation to the graph: From the graph above, we can illustrate from the plot for valuable information. The graph shows that the death rate of Malaria of each country from year 1990 to year 2015. The size of circles represent the death rate in the countries so there are some countries have few deaths of malaria such as Afghanistan,Albania. And there are some countries have large death rate such as Namibia, Malawi. And it is very clear to see that the highest death rate among all the countries are from 2000 - 2005. Users can also put the mouse on the circle to see the details of each circle. 
+
+<br />
+<br />
+
+This is code to generate the plot for the second dataset which is `malaria_deaths_age.csv`
+
+```
+gra = px.scatter(data2, 
+"""I use the px.scatter function to generate scatterplot for data
+2 """
+                 x="entity", 
+                 y="deaths", 
+"""Use x-axis for all the countries, and y-axis for the dealth number in each country"""
+
+                 color="age_group",
+"""I set different age groups to different colors so we can use this plot to make some comparsion between different age groups"""                 
+                )
+gra
+
+"""output the graph in the following"""
+```
+
+![data2](https://user-images.githubusercontent.com/78027134/135564778-fb4a40db-3b54-4dc5-a127-8814313970b3.png)
+
+<br />
+
+### explanation to the graph: It is very obvious that the people who are under age 5 and age between 5 -14 have a much higher death rate of malaria among the countries. My explnation for that is younger people have a less comprehansive immune system so that they have the larger probabilty to die because of malaria. Users can put the mouse on the points to see the details on each point.   
+
+<br />
+<br />
+
+
+This following code is to generate the plot for the third dataset which is `malaria_inc.csv`
+
+```
+"""Use the alt.Chart to plot the point chart for the data3"""
+alt.Chart(data=data3).mark_point().encode(
+    x="Entity",
+    y="Incidence of malaria (per 1,000 population at risk) (per 1,000 population at risk)",
+"""Use x-axis as all the countries in the dataset, use y-axis for the incidence of malaria"""
+
+    color = "Entity"
+"""Here, I put different countries in different colors so that we can easily distinguish different countries. """        
+)
+
+```
+
+![data3](https://user-images.githubusercontent.com/78027134/135564832-f2b24416-c946-4ed5-abff-901307bbb49c.png)
+
+<br />
+
+### explanation to the graph: From this graph, we can see that there are some countries have very low incidence of malaria such as Thailand, Vietnam, South Korea. There are also some countries have relatively high incidence of malaria such as Ethiopia, Liberia and Turky. And we can see there is a huge outlier in Turkey. The difference of incidence of malaria between countries is based on the measures they take or the spreadness of malaria to this country. 
+
+
+
+
+
