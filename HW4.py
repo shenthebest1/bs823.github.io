@@ -1,702 +1,180 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": 13,
-   "id": "2b5dfba7",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "\n",
-    "\n",
-    "import streamlit as st\n",
-    "import pandas as pd\n",
-    "import numpy as np\n",
-    "import plotly.express as px\n",
-    "from plotly.subplots import make_subplots\n",
-    "import plotly.graph_objects as go\n",
-    "import matplotlib.pyplot as plt"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 51,
-   "id": "0e7e33d5",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "#pip install plotly"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 52,
-   "id": "75cb44d6",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "#pip install streamlit"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 53,
-   "id": "1ba653cf",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "#df = pd.read_excel(\"sed17-sr-tab046.xlsx\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 54,
-   "id": "3ddab6de",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "#df"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 55,
-   "id": "febd5750",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "#df.dropna()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 57,
-   "id": "348d9557",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "#df = df.rename(columns={'Unnamed: 1': 'Total', 'Unnamed: 2': 'Life sciences', 'Unnamed: 3': 'Physical sciences and earth sciences','Unnamed: 4': 'Mathematics and computer sciences',\n",
-    "#                        'Unnamed: 5': 'Psychology and social sciences','Unnamed: 6': 'Engineering','Unnamed: 7': 'Education','Unnamed: 8': 'Humanities and arts',\n",
-    "#                        'Unnamed: 9': 'others'})\n",
-    "#df"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 58,
-   "id": "f37671f4",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "#df = df.iloc[1: , :]\n",
-    "#df"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 59,
-   "id": "644e2437",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "#df = df.iloc[1: , :]\n",
-    "#df"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 60,
-   "id": "448c9ed7",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "#df = df.iloc[1: , :]\n",
-    "#df"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 17,
-   "id": "5e06d449",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "2021-10-23 16:17:10.791 \n",
-      "  \u001b[33m\u001b[1mWarning:\u001b[0m to view this Streamlit app on a browser, run it with the following\n",
-      "  command:\n",
-      "\n",
-      "    streamlit run /Users/shenjiajie/opt/anaconda3/lib/python3.8/site-packages/ipykernel_launcher.py [ARGUMENTS]\n"
-     ]
-    },
-    {
-     "data": {
-      "text/plain": [
-       "DeltaGenerator(_root_container=1, _provided_cursor=None, _parent=DeltaGenerator(_root_container=0, _provided_cursor=None, _parent=None, _block_type=None, _form_data=None), _block_type=None, _form_data=None)"
-      ]
-     },
-     "execution_count": 17,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "st.sidebar.title(\"Visualization Selector\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 46,
-   "id": "837e73ee",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "/Users/shenjiajie/opt/anaconda3/lib/python3.8/site-packages/openpyxl/styles/stylesheet.py:221: UserWarning:\n",
-      "\n",
-      "Workbook contains no default style, apply openpyxl's default\n",
-      "\n"
-     ]
-    },
-    {
-     "data": {
-      "text/html": [
-       "<div>\n",
-       "<style scoped>\n",
-       "    .dataframe tbody tr th:only-of-type {\n",
-       "        vertical-align: middle;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe tbody tr th {\n",
-       "        vertical-align: top;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe thead th {\n",
-       "        text-align: right;\n",
-       "    }\n",
-       "</style>\n",
-       "<table border=\"1\" class=\"dataframe\">\n",
-       "  <thead>\n",
-       "    <tr style=\"text-align: right;\">\n",
-       "      <th></th>\n",
-       "      <th>Table 1</th>\n",
-       "      <th>Unnamed: 1</th>\n",
-       "      <th>Unnamed: 2</th>\n",
-       "    </tr>\n",
-       "  </thead>\n",
-       "  <tbody>\n",
-       "    <tr>\n",
-       "      <th>0</th>\n",
-       "      <td>Doctorate recipients from U.S. colleges and un...</td>\n",
-       "      <td>NaN</td>\n",
-       "      <td>NaN</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>1</th>\n",
-       "      <td>(Number and percent)</td>\n",
-       "      <td>NaN</td>\n",
-       "      <td>NaN</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>2</th>\n",
-       "      <td>Year</td>\n",
-       "      <td>Doctorate recipients</td>\n",
-       "      <td>% change from previous year</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>3</th>\n",
-       "      <td>1958</td>\n",
-       "      <td>8773</td>\n",
-       "      <td>-</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>4</th>\n",
-       "      <td>1959</td>\n",
-       "      <td>9213</td>\n",
-       "      <td>5</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>...</th>\n",
-       "      <td>...</td>\n",
-       "      <td>...</td>\n",
-       "      <td>...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>58</th>\n",
-       "      <td>2013</td>\n",
-       "      <td>52704</td>\n",
-       "      <td>3.5</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>59</th>\n",
-       "      <td>2014</td>\n",
-       "      <td>53992</td>\n",
-       "      <td>2.4</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>60</th>\n",
-       "      <td>2015</td>\n",
-       "      <td>54901</td>\n",
-       "      <td>1.7</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>61</th>\n",
-       "      <td>2016</td>\n",
-       "      <td>54862</td>\n",
-       "      <td>-0.1</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>62</th>\n",
-       "      <td>2017</td>\n",
-       "      <td>54664</td>\n",
-       "      <td>-0.4</td>\n",
-       "    </tr>\n",
-       "  </tbody>\n",
-       "</table>\n",
-       "<p>63 rows × 3 columns</p>\n",
-       "</div>"
-      ],
-      "text/plain": [
-       "                                              Table 1            Unnamed: 1  \\\n",
-       "0   Doctorate recipients from U.S. colleges and un...                   NaN   \n",
-       "1                                (Number and percent)                   NaN   \n",
-       "2                                                Year  Doctorate recipients   \n",
-       "3                                                1958                  8773   \n",
-       "4                                                1959                  9213   \n",
-       "..                                                ...                   ...   \n",
-       "58                                               2013                 52704   \n",
-       "59                                               2014                 53992   \n",
-       "60                                               2015                 54901   \n",
-       "61                                               2016                 54862   \n",
-       "62                                               2017                 54664   \n",
-       "\n",
-       "                     Unnamed: 2  \n",
-       "0                           NaN  \n",
-       "1                           NaN  \n",
-       "2   % change from previous year  \n",
-       "3                             -  \n",
-       "4                             5  \n",
-       "..                          ...  \n",
-       "58                          3.5  \n",
-       "59                          2.4  \n",
-       "60                          1.7  \n",
-       "61                         -0.1  \n",
-       "62                         -0.4  \n",
-       "\n",
-       "[63 rows x 3 columns]"
-      ]
-     },
-     "execution_count": 46,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "\n",
-    "\n",
-    "\n",
-    "df1 = pd.read_excel(\"sed17-sr-tab001.xlsx\")\n",
-    "df1"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 47,
-   "id": "2872f67c",
-   "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/html": [
-       "<div>\n",
-       "<style scoped>\n",
-       "    .dataframe tbody tr th:only-of-type {\n",
-       "        vertical-align: middle;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe tbody tr th {\n",
-       "        vertical-align: top;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe thead th {\n",
-       "        text-align: right;\n",
-       "    }\n",
-       "</style>\n",
-       "<table border=\"1\" class=\"dataframe\">\n",
-       "  <thead>\n",
-       "    <tr style=\"text-align: right;\">\n",
-       "      <th></th>\n",
-       "      <th>Table 1</th>\n",
-       "      <th>Doctorate_recipients</th>\n",
-       "      <th>percentage_change</th>\n",
-       "    </tr>\n",
-       "  </thead>\n",
-       "  <tbody>\n",
-       "    <tr>\n",
-       "      <th>0</th>\n",
-       "      <td>Doctorate recipients from U.S. colleges and un...</td>\n",
-       "      <td>NaN</td>\n",
-       "      <td>NaN</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>1</th>\n",
-       "      <td>(Number and percent)</td>\n",
-       "      <td>NaN</td>\n",
-       "      <td>NaN</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>2</th>\n",
-       "      <td>Year</td>\n",
-       "      <td>Doctorate recipients</td>\n",
-       "      <td>% change from previous year</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>3</th>\n",
-       "      <td>1958</td>\n",
-       "      <td>8773</td>\n",
-       "      <td>-</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>4</th>\n",
-       "      <td>1959</td>\n",
-       "      <td>9213</td>\n",
-       "      <td>5</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>...</th>\n",
-       "      <td>...</td>\n",
-       "      <td>...</td>\n",
-       "      <td>...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>58</th>\n",
-       "      <td>2013</td>\n",
-       "      <td>52704</td>\n",
-       "      <td>3.5</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>59</th>\n",
-       "      <td>2014</td>\n",
-       "      <td>53992</td>\n",
-       "      <td>2.4</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>60</th>\n",
-       "      <td>2015</td>\n",
-       "      <td>54901</td>\n",
-       "      <td>1.7</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>61</th>\n",
-       "      <td>2016</td>\n",
-       "      <td>54862</td>\n",
-       "      <td>-0.1</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>62</th>\n",
-       "      <td>2017</td>\n",
-       "      <td>54664</td>\n",
-       "      <td>-0.4</td>\n",
-       "    </tr>\n",
-       "  </tbody>\n",
-       "</table>\n",
-       "<p>63 rows × 3 columns</p>\n",
-       "</div>"
-      ],
-      "text/plain": [
-       "                                              Table 1  Doctorate_recipients  \\\n",
-       "0   Doctorate recipients from U.S. colleges and un...                   NaN   \n",
-       "1                                (Number and percent)                   NaN   \n",
-       "2                                                Year  Doctorate recipients   \n",
-       "3                                                1958                  8773   \n",
-       "4                                                1959                  9213   \n",
-       "..                                                ...                   ...   \n",
-       "58                                               2013                 52704   \n",
-       "59                                               2014                 53992   \n",
-       "60                                               2015                 54901   \n",
-       "61                                               2016                 54862   \n",
-       "62                                               2017                 54664   \n",
-       "\n",
-       "              percentage_change  \n",
-       "0                           NaN  \n",
-       "1                           NaN  \n",
-       "2   % change from previous year  \n",
-       "3                             -  \n",
-       "4                             5  \n",
-       "..                          ...  \n",
-       "58                          3.5  \n",
-       "59                          2.4  \n",
-       "60                          1.7  \n",
-       "61                         -0.1  \n",
-       "62                         -0.4  \n",
-       "\n",
-       "[63 rows x 3 columns]"
-      ]
-     },
-     "execution_count": 47,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "df1 = df1.rename(columns={'Unnamed: 1': 'Doctorate_recipients', 'Unnamed: 2': 'percentage_change'})\n",
-    "df1"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 48,
-   "id": "64c23b88",
-   "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/html": [
-       "<div>\n",
-       "<style scoped>\n",
-       "    .dataframe tbody tr th:only-of-type {\n",
-       "        vertical-align: middle;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe tbody tr th {\n",
-       "        vertical-align: top;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe thead th {\n",
-       "        text-align: right;\n",
-       "    }\n",
-       "</style>\n",
-       "<table border=\"1\" class=\"dataframe\">\n",
-       "  <thead>\n",
-       "    <tr style=\"text-align: right;\">\n",
-       "      <th></th>\n",
-       "      <th>Table 1</th>\n",
-       "      <th>Doctorate_recipients</th>\n",
-       "      <th>percentage_change</th>\n",
-       "    </tr>\n",
-       "  </thead>\n",
-       "  <tbody>\n",
-       "    <tr>\n",
-       "      <th>2</th>\n",
-       "      <td>Year</td>\n",
-       "      <td>Doctorate recipients</td>\n",
-       "      <td>% change from previous year</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>3</th>\n",
-       "      <td>1958</td>\n",
-       "      <td>8773</td>\n",
-       "      <td>-</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>4</th>\n",
-       "      <td>1959</td>\n",
-       "      <td>9213</td>\n",
-       "      <td>5</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>5</th>\n",
-       "      <td>1960</td>\n",
-       "      <td>9733</td>\n",
-       "      <td>5.6</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>6</th>\n",
-       "      <td>1961</td>\n",
-       "      <td>10413</td>\n",
-       "      <td>7</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>...</th>\n",
-       "      <td>...</td>\n",
-       "      <td>...</td>\n",
-       "      <td>...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>58</th>\n",
-       "      <td>2013</td>\n",
-       "      <td>52704</td>\n",
-       "      <td>3.5</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>59</th>\n",
-       "      <td>2014</td>\n",
-       "      <td>53992</td>\n",
-       "      <td>2.4</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>60</th>\n",
-       "      <td>2015</td>\n",
-       "      <td>54901</td>\n",
-       "      <td>1.7</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>61</th>\n",
-       "      <td>2016</td>\n",
-       "      <td>54862</td>\n",
-       "      <td>-0.1</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>62</th>\n",
-       "      <td>2017</td>\n",
-       "      <td>54664</td>\n",
-       "      <td>-0.4</td>\n",
-       "    </tr>\n",
-       "  </tbody>\n",
-       "</table>\n",
-       "<p>61 rows × 3 columns</p>\n",
-       "</div>"
-      ],
-      "text/plain": [
-       "   Table 1  Doctorate_recipients            percentage_change\n",
-       "2     Year  Doctorate recipients  % change from previous year\n",
-       "3     1958                  8773                            -\n",
-       "4     1959                  9213                            5\n",
-       "5     1960                  9733                          5.6\n",
-       "6     1961                 10413                            7\n",
-       "..     ...                   ...                          ...\n",
-       "58    2013                 52704                          3.5\n",
-       "59    2014                 53992                          2.4\n",
-       "60    2015                 54901                          1.7\n",
-       "61    2016                 54862                         -0.1\n",
-       "62    2017                 54664                         -0.4\n",
-       "\n",
-       "[61 rows x 3 columns]"
-      ]
-     },
-     "execution_count": 48,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "df1 = df1.iloc[2:]\n",
-    "#Remove the first three rows from the df1\n",
-    "df1"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "8cd7bd29",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "st.title(\"Number of Doctorate recipients from 1958 to 2017 Dashboard\")\n",
-    "#st.markdown(\"The dashboard will help a researcher to get to know \\\n",
-    "#more about the given datasets and it's output\")\n",
-    "st.sidebar.title(\"Select Visual Charts\")\n",
-    "st.sidebar.markdown(\"Select the Charts/Plots accordingly:\")\n",
-    "\n",
-    "\n",
-    "\n"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 31,
-   "id": "be3e6f05",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "chart_visual = st.sidebar.selectbox('Select Charts/Plot type', \n",
-    "                                    ('Line Chart', 'Bar Chart', 'Bubble Chart'))"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 49,
-   "id": "f8a13830",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "fig = go.Figure()\n",
-    "  \n",
-    "    \n",
-    "\n",
-    "    \n",
-    "if chart_visual == 'Line Chart':\n",
-    "\n",
-    "    fig.add_trace(go.Scatter(x = df1.Doctorate_recipients, y = df1.percentage_change,\n",
-    "                             mode = 'lines',\n",
-    "                             ))\n",
-    "\n",
-    "        \n",
-    "        "
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "87643abd",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "a73d9eaa",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "8017e713",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "7b78434f",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "f6e4bbf1",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "9a37c9e6",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.8.8"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[13]:
+
+
+
+
+import streamlit as st
+import pandas as pd
+import numpy as np
+import plotly.express as px
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+
+
+# In[51]:
+
+
+#pip install plotly
+
+
+# In[52]:
+
+
+#pip install streamlit
+
+
+# In[53]:
+
+
+#df = pd.read_excel("sed17-sr-tab046.xlsx")
+
+
+# In[54]:
+
+
+#df
+
+
+# In[55]:
+
+
+#df.dropna()
+
+
+# In[57]:
+
+
+#df = df.rename(columns={'Unnamed: 1': 'Total', 'Unnamed: 2': 'Life sciences', 'Unnamed: 3': 'Physical sciences and earth sciences','Unnamed: 4': 'Mathematics and computer sciences',
+#                        'Unnamed: 5': 'Psychology and social sciences','Unnamed: 6': 'Engineering','Unnamed: 7': 'Education','Unnamed: 8': 'Humanities and arts',
+#                        'Unnamed: 9': 'others'})
+#df
+
+
+# In[58]:
+
+
+#df = df.iloc[1: , :]
+#df
+
+
+# In[59]:
+
+
+#df = df.iloc[1: , :]
+#df
+
+
+# In[60]:
+
+
+#df = df.iloc[1: , :]
+#df
+
+
+# In[17]:
+
+
+st.sidebar.title("Visualization Selector")
+
+
+# In[46]:
+
+
+
+
+
+df1 = pd.read_excel("sed17-sr-tab001.xlsx")
+df1
+
+
+# In[47]:
+
+
+df1 = df1.rename(columns={'Unnamed: 1': 'Doctorate_recipients', 'Unnamed: 2': 'percentage_change'})
+df1
+
+
+# In[48]:
+
+
+df1 = df1.iloc[2:]
+#Remove the first three rows from the df1
+df1
+
+
+# In[ ]:
+
+
+st.title("Number of Doctorate recipients from 1958 to 2017 Dashboard")
+#st.markdown("The dashboard will help a researcher to get to know \
+#more about the given datasets and it's output")
+st.sidebar.title("Select Visual Charts")
+st.sidebar.markdown("Select the Charts/Plots accordingly:")
+
+
+
+
+# In[31]:
+
+
+chart_visual = st.sidebar.selectbox('Select Charts/Plot type', 
+                                    ('Line Chart', 'Bar Chart', 'Bubble Chart'))
+
+
+# In[49]:
+
+
+fig = go.Figure()
+  
+    
+
+    
+if chart_visual == 'Line Chart':
+
+    fig.add_trace(go.Scatter(x = df1.Doctorate_recipients, y = df1.percentage_change,
+                             mode = 'lines',
+                             ))
+
+        
+        
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
