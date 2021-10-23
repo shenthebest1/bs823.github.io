@@ -18,13 +18,13 @@ import matplotlib.pyplot as plt
 # In[51]:
 
 
-#pip install plotly
+pip install plotly
 
 
 # In[52]:
 
 
-#pip install streamlit
+pip install streamlit
 
 
 # In[53]:
