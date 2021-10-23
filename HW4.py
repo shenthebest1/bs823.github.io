@@ -9,22 +9,22 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.express as px
-from plotly.subplots import make_subplots
-import plotly.graph_objects as go
+#import plotly.express as px
+#from plotly.subplots import make_subplots
+#import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 
 
 # In[51]:
 
 
-pip install plotly
+#pip install plotly
 
 
 # In[52]:
 
 
-pip install streamlit
+#pip install streamlit
 
 
 # In[53]:
