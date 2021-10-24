@@ -112,7 +112,7 @@ chart_visual = st.sidebar.selectbox('Select Charts/Plot type',
                                     ('Line Chart', 'Bar Chart', 'Bubble Chart'))
 
 
-# In[41]:
+# In[42]:
 
 
 fig = go.Figure()
@@ -141,6 +141,39 @@ elif chart_visual == 'Bubble Chart':
         
         
 st.plotly_chart(fig, use_container_width=True)
+
+
+# In[45]:
+
+
+st.title("Percentage change of total number of Doctorate recipients from 1958 to 2017 Dashboard")
+
+fig1 = go.Figure()
+  
+    
+
+    
+if chart_visual == 'Line Chart':
+
+    fig.add_trace(go.Scatter(x = df1.Year, y = df1.percentage_change,
+                             mode = 'lines',
+                             ))
+
+elif chart_visual == 'Bar Chart':
+    
+    fig.add_trace(go.Bar(x = df1.Year, y = df1.percentage_change,
+                             ))
+
+elif chart_visual == 'Bubble Chart':
+  
+    fig.add_trace(go.Scatter(x=df1.Year, 
+                             y=df1.percentage_change,
+                             mode='markers',
+                             marker_size=[40, 60, 80, 60, 40, 50],
+                            ))
+        
+        
+st.plotly_chart(fig1, use_container_width=True)
 
 
 # In[ ]:
