@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[67]:
+# In[4]:
 
 
 
@@ -9,22 +9,10 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-#import plotly.express as px
-#from plotly.subplots import make_subplots
+import plotly.express as px
+from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 #import matplotlib.pyplot as plt
-
-
-# In[51]:
-
-
-#pip install plotly
-
-
-# In[52]:
-
-
-#pip install streamlit
 
 
 # In[53]:
@@ -75,30 +63,29 @@ import plotly.graph_objects as go
 #df
 
 
-# In[17]:
+# In[33]:
 
 
 st.sidebar.title("Visualization Selector")
 
 
-# In[61]:
+# In[34]:
 
 
 
 
 
 df1 = pd.read_excel('sed17-sr-tab001.xlsx')
+
+
+# In[35]:
+
+
+df1.columns = ['Year', 'Doctorate_recipients', 'percentage_change']
 df1
 
 
-# In[62]:
-
-
-df1 = df1.rename(columns={'Unnamed: 1': 'Doctorate_recipients', 'Unnamed: 2': 'percentage_change'})
-df1
-
-
-# In[63]:
+# In[36]:
 
 
 df1 = df1.iloc[3:]
@@ -106,7 +93,7 @@ df1 = df1.iloc[3:]
 df1
 
 
-# In[64]:
+# In[37]:
 
 
 st.title("Number of Doctorate recipients from 1958 to 2017 Dashboard")
@@ -118,14 +105,14 @@ st.sidebar.markdown("Select the Charts/Plots accordingly:")
 
 
 
-# In[65]:
+# In[38]:
 
 
 chart_visual = st.sidebar.selectbox('Select Charts/Plot type', 
                                     ('Line Chart', 'Bar Chart', 'Bubble Chart'))
 
 
-# In[66]:
+# In[39]:
 
 
 fig = go.Figure()
@@ -135,7 +122,7 @@ fig = go.Figure()
     
 if chart_visual == 'Line Chart':
 
-    fig.add_trace(go.Scatter(x = df1.Doctorate_recipients, y = df1.percentage_change,
+    fig.add_trace(go.Scatter(x = df1.Year, y = df1.percentage_change,
                              mode = 'lines',
                              ))
 
