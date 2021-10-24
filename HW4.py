@@ -143,10 +143,27 @@ elif chart_visual == 'Bubble Chart':
 st.plotly_chart(fig, use_container_width=True)
 
 
-# In[45]:
+# In[46]:
 
 
 st.title("Percentage change of total number of Doctorate recipients from 1958 to 2017 Dashboard")
+#st.markdown("The dashboard will help a researcher to get to know \
+#more about the given datasets and it's output")
+st.sidebar.title("Select Visual Charts")
+st.sidebar.markdown("Select the Charts/Plots accordingly:")
+
+
+# In[47]:
+
+
+chart_visual = st.sidebar.selectbox('Select Charts/Plot type', 
+                                    ('Line Chart', 'Bar Chart', 'Bubble Chart'))
+
+
+# In[48]:
+
+
+
 
 fig1 = go.Figure()
   
