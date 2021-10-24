@@ -101,7 +101,7 @@ df1
 # In[63]:
 
 
-df1 = df1.iloc[2:]
+df1 = df1.iloc[3:]
 #Remove the first three rows from the df1
 df1
 
