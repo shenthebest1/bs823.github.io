@@ -112,7 +112,7 @@ chart_visual = st.sidebar.selectbox('Select Charts/Plot type',
                                     ('Line Chart', 'Bar Chart', 'Bubble Chart'))
 
 
-# In[39]:
+# In[41]:
 
 
 fig = go.Figure()
@@ -122,10 +122,24 @@ fig = go.Figure()
     
 if chart_visual == 'Line Chart':
 
-    fig.add_trace(go.Scatter(x = df1.Year, y = df1.percentage_change,
+    fig.add_trace(go.Scatter(x = df1.Year, y = df1.Doctorate_recipients,
                              mode = 'lines',
                              ))
 
+elif chart_visual == 'Bar Chart':
+    
+    fig.add_trace(go.Bar(x = df1.Year, y = df1.Doctorate_recipients,
+                             ))
+
+elif chart_visual == 'Bubble Chart':
+  
+    fig.add_trace(go.Scatter(x=df1.Year, 
+                             y=df1.Doctorate_recipients,
+                             mode='markers',
+                             marker_size=[40, 60, 80, 60, 40, 50],
+                            ))
+        
+        
 st.plotly_chart(fig, use_container_width=True)
 
 
