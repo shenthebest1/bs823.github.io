@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[13]:
+# In[67]:
 
 
 
@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 #import plotly.express as px
 #from plotly.subplots import make_subplots
-#import plotly.graph_objects as go
+import plotly.graph_objects as go
 #import matplotlib.pyplot as plt
 
 
@@ -81,24 +81,24 @@ import numpy as np
 st.sidebar.title("Visualization Selector")
 
 
-# In[46]:
+# In[61]:
 
 
 
 
 
-df1 = pd.read_excel("sed17-sr-tab001.xlsx")
+df1 = pd.read_excel('sed17-sr-tab001.xlsx')
 df1
 
 
-# In[47]:
+# In[62]:
 
 
 df1 = df1.rename(columns={'Unnamed: 1': 'Doctorate_recipients', 'Unnamed: 2': 'percentage_change'})
 df1
 
 
-# In[48]:
+# In[63]:
 
 
 df1 = df1.iloc[2:]
@@ -106,7 +106,7 @@ df1 = df1.iloc[2:]
 df1
 
 
-# In[ ]:
+# In[64]:
 
 
 st.title("Number of Doctorate recipients from 1958 to 2017 Dashboard")
@@ -118,14 +118,14 @@ st.sidebar.markdown("Select the Charts/Plots accordingly:")
 
 
 
-# In[31]:
+# In[65]:
 
 
 chart_visual = st.sidebar.selectbox('Select Charts/Plot type', 
                                     ('Line Chart', 'Bar Chart', 'Bubble Chart'))
 
 
-# In[49]:
+# In[66]:
 
 
 fig = go.Figure()
