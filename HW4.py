@@ -126,8 +126,7 @@ if chart_visual == 'Line Chart':
                              mode = 'lines',
                              ))
 
-        
-        
+st.plotly_chart(fig, use_container_width=True)
 
 
 # In[ ]:
