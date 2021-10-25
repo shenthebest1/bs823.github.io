@@ -63,13 +63,7 @@ import plotly.graph_objects as go
 #df
 
 
-# In[33]:
-
-
-st.sidebar.title("Visualization Selector for Number of Doctorate recipients from 1958 to 2017 Dashboard")
-
-
-# In[3]:
+# In[21]:
 
 
 
@@ -78,22 +72,20 @@ st.sidebar.title("Visualization Selector for Number of Doctorate recipients from
 df1 = pd.read_excel('sed17-sr-tab001.xlsx')
 
 
-# In[4]:
+# In[22]:
 
 
 df1.columns = ['Year', 'Doctorate_recipients', 'percentage_change']
-df1
 
 
-# In[5]:
+# In[23]:
 
 
 df1 = df1.iloc[3:]
 #Remove the first three rows from the df1
-df1
 
 
-# In[6]:
+# In[24]:
 
 
 st.title("Number of Doctorate recipients from 1958 to 2017 Dashboard")
@@ -203,6 +195,7 @@ st.plotly_chart(fig1, use_container_width=True)
 # In[14]:
 
 
+#Load the second dataset
 df2 = pd.read_excel('sed17-sr-tab005.xlsx')
 
 
@@ -223,8 +216,8 @@ df2.columns = ['State', 'Rank', 'Doctorate recipients']
 
 #Code for third dashboard
 
-st.title("Percentage change of total number of Doctorate recipients from 1958 to 2017 Dashboard")
-st.markdown("The dashboard will help a researcher to better understandhow the percentage change of total number of Doctorate recipients through 1958 to 2017 ")
+st.title("A US map dashboard showing the number of doctorate recipients of each state in 2017")
+st.markdown("The dashboard will help a researcher to better understandhow the total number of Doctorate recipients from each state is different from each other in 2017 ")
 
 
 # In[20]:
@@ -286,7 +279,7 @@ df2['U'] = df2['State'].map(state)
 fig2 = px.choropleth(df2,
                     locations='U',
                     color='Doctorate recipients',
-                    color_continuous_scale='spectral_r',
+                    #color_continuous_scale='spectral_r',
                     hover_name='State',
                     locationmode='USA-states',
                     scope='usa')
@@ -304,6 +297,89 @@ fig2.update_layout(
            'x':0.5})
 
 st.plotly_chart(fig2, use_container_width=True)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[42]:
+
+
+#Load the third dataset
+df3 = pd.read_excel('sed17-sr-tab004.xlsx')
+
+
+# In[43]:
+
+
+
+
+
+df3 = df3.iloc[5:]
+df3.columns = ['Top20_Institution', 'Rank', 'Doctorate_recipients']
+df3 = df3.head(3)
+df3
+
+
+# In[45]:
+
+
+fig3 = px.pie(df3, values=df3.Doctorate_recipients, names=df3.Top20_Institution, color=df3.Top20_Institution,
+color_discrete_map={'Johns Hopkins U.':'cyan', 'U. Wisconsin-Madison':'royalblue','U. Florida':'darkblue'})
+
+
+
+
+
+
+
+# In[46]:
+
+
+fig3.update_layout(
+title="<b>Top 20 Institutions</b>")
+
+
+st.plotly_chart(fig3)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
