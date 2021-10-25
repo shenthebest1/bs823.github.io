@@ -66,7 +66,7 @@ import plotly.graph_objects as go
 # In[33]:
 
 
-st.sidebar.title("Visualization Selector")
+st.sidebar.title("Visualization Selector for Number of Doctorate recipients from 1958 to 2017 Dashboard")
 
 
 # In[34]:
@@ -149,8 +149,8 @@ st.plotly_chart(fig, use_container_width=True)
 st.title("Percentage change of total number of Doctorate recipients from 1958 to 2017 Dashboard")
 #st.markdown("The dashboard will help a researcher to get to know \
 #more about the given datasets and it's output")
-st.sidebar.title("Select Visual Charts")
-st.sidebar.markdown("Select the Charts/Plots accordingly:")
+#st.sidebar.title("Select Visual Charts")
+#st.sidebar.markdown("Select the Charts/Plots accordingly:")
 
 
 # In[51]:
@@ -163,24 +163,24 @@ fig1 = go.Figure()
     
 
     
-if chart_visual == 'Line Chart':
+#chart_visual == 'Line Chart':
 
     fig.add_trace(go.Scatter(x = df1.Year, y = df1.percentage_change,
                              mode = 'lines',
                              ))
 
-elif chart_visual == 'Bar Chart':
+#elif chart_visual == 'Bar Chart':
     
-    fig.add_trace(go.Bar(x = df1.Year, y = df1.percentage_change,
-                             ))
+#    fig.add_trace(go.Bar(x = df1.Year, y = df1.percentage_change,
+#                             ))
 
-elif chart_visual == 'Bubble Chart':
+#elif chart_visual == 'Bubble Chart':
   
-    fig.add_trace(go.Scatter(x=df1.Year, 
-                             y=df1.percentage_change,
-                             mode='markers',
-                             marker_size=[40, 60, 80, 60, 40, 50],
-                            ))
+#    fig.add_trace(go.Scatter(x=df1.Year, 
+#                             y=df1.percentage_change,
+#                             mode='markers',
+#                             marker_size=[40, 60, 80, 60, 40, 50],
+#                            ))
         
         
 st.plotly_chart(fig1, use_container_width=True)
