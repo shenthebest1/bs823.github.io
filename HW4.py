@@ -167,18 +167,18 @@ fig1 = go.Figure()
     
 if chart_visual1 == 'line Chart':
 
-    fig.add_trace(go.Scatter(x = df1.Year, y = df1.percentage_change,
+    fig1.add_trace(go.Scatter(x = df1.Year, y = df1.percentage_change,
                              mode = 'lines',
                              ))
 
 elif chart_visual1 == 'bar Chart':
     
-    fig.add_trace(go.Bar(x = df1.Year, y = df1.percentage_change,
+    fig1.add_trace(go.Bar(x = df1.Year, y = df1.percentage_change,
                              ))
 
 elif chart_visual1 == 'Bubble Chart':
   
-    fig.add_trace(go.Scatter(x=df1.Year, 
+    fig1.add_trace(go.Scatter(x=df1.Year, 
                              y=df1.percentage_change,
                              mode='markers',
                              marker_size=[40, 60, 80, 60, 40, 50],
