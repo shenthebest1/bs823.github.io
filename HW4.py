@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[12]:
 
 
 
@@ -12,7 +12,6 @@ import numpy as np
 import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-#import matplotlib.pyplot as plt
 
 
 # In[ ]:
@@ -56,7 +55,7 @@ st.markdown("The dashboard will help a researcher to get to understand the trend
 # In[7]:
 
 
-
+"""Here is the code to set up the selection box for the first dashboard"""
 chart_visual = st.selectbox(
     label="Select Charts/Plot type", options=['Line Chart', 'Bar Chart', 'Bubble Chart']
 )
@@ -69,18 +68,22 @@ fig = go.Figure()
   
     
 
-    
+"""Set the if elseif function here to check whether the users choose Line Chart, Bar Chart or Bubble Chart,
+the first chunk here is for the line chart"""    
 if chart_visual == 'Line Chart':
 
     fig.add_trace(go.Scatter(x = df1.Year, y = df1.Doctorate_recipients,
                              mode = 'lines',
                              ))
-
+    
+    
+"""Here is the chunk code for bar chart"""
 elif chart_visual == 'Bar Chart':
     
     fig.add_trace(go.Bar(x = df1.Year, y = df1.Doctorate_recipients,
                              ))
 
+"""Here is the chunk code for Bubble chart"""
 elif chart_visual == 'Bubble Chart':
   
     fig.add_trace(go.Scatter(x=df1.Year, 
@@ -95,15 +98,16 @@ st.plotly_chart(fig, use_container_width=True)
 # In[9]:
 
 
-#Code for second dashboard
+"""Code for second dashboard start from here"""
 
 st.title("Percentage change of total number of Doctorate recipients from 1958 to 2017 Dashboard")
-st.markdown("The dashboard will help a researcher to better understandhow the percentage change of total number of Doctorate recipients through 1958 to 2017 ")
+st.markdown("The dashboard will help a researcher to better understand how the percentage change of total number of Doctorate recipients through 1958 to 2017 ")
 
 
 # In[10]:
 
 
+"""Here is the code to set up the selection box for the second dashboard"""
 chart_visual1 = st.selectbox(
     label="Select Charts type", options=['line Chart', 'bar Chart', 'Bubble Chart']
 )
@@ -117,7 +121,8 @@ chart_visual1 = st.selectbox(
 fig1 = go.Figure()
   
     
-
+"""Set the if elseif function here to check whether the users choose Line Chart, Bar Chart or Bubble Chart, the first chunk
+here is for the line chart""" 
     
 if chart_visual1 == 'line Chart':
 
@@ -125,11 +130,14 @@ if chart_visual1 == 'line Chart':
                              mode = 'lines',
                              ))
 
+"""This chunk of code is for bar chart"""
 elif chart_visual1 == 'bar Chart':
     
     fig1.add_trace(go.Bar(x = df1.Year, y = df1.percentage_change,
                              ))
-
+    
+    
+"""This chun of code is for Bubble chart"""
 elif chart_visual1 == 'Bubble Chart':
   
     fig1.add_trace(go.Scatter(x=df1.Year, 
@@ -147,37 +155,40 @@ st.plotly_chart(fig1, use_container_width=True)
 
 
 
-# In[14]:
+# In[3]:
 
 
 #Load the second dataset
 df2 = pd.read_excel('sed17-sr-tab005.xlsx')
 
 
-# In[16]:
+# In[4]:
 
 
+"""Remove the first three rows of the dataframe"""
 df2 = df2.iloc[3:]
 
 
-# In[17]:
+# In[5]:
 
 
+"""Rename the dataframe columns"""
 df2.columns = ['State', 'Rank', 'Doctorate recipients']
 
 
-# In[ ]:
+# In[6]:
 
 
-#Code for third dashboard
+#Code for third dashboard is written below
 
 st.title("A US map dashboard showing the number of doctorate recipients of each state in 2017")
-st.markdown("The dashboard will help a researcher to better understandhow the total number of Doctorate recipients from each state is different from each other in 2017 ")
+st.markdown("The dashboard will help a researcher to better understand how the total number of Doctorate recipients from each state is different from each other in 2017 ")
 
 
-# In[20]:
+# In[24]:
 
 
+"""associate the abbreviation to each state"""
 state = {'Alabama': 'AL',
         'Alaska': 'AK',
         'Arizona': 'AZ',
@@ -230,34 +241,36 @@ state = {'Alabama': 'AL',
         'Wisconsin': 'WI',
         'Wyoming': 'WY'}
 
-df2['U'] = df2['State'].map(state)
+df2['S'] = df2['State'].map(state)
+
+
+"""Use the px.choropleth function to use the US map and then insert df2 to make the US map reflect information about our
+datadrame, use color to make each state has different color. """
 fig2 = px.choropleth(df2,
-                    locations='U',
-                    color='State',
-                    #color_continuous_scale='spectral_r',
-                    hover_name='State',
+                    locations='S',
                     locationmode='USA-states',
+                    hover_name='State',
+                    color='Doctorate recipients',
                     scope='usa')
 
+
+"""Assign the abbreviation of each state on the map"""
 fig2.add_scattergeo(
-    locations=df2['U'],
+    text=df2['S'],
+    locations=df2['S'],
     locationmode='USA-states',
-    text=df2['U'],
     mode='text')
 
+
+"""Assign a title for this dashboard"""
 fig2.update_layout(
-    title={'text':'Fig 2. An USA map of Number of doctorate recipients by State',
-           'xanchor':'center',
-           'yanchor':'top',
-           'x':0.5})
+    
+title="<b>An USA map of Number of doctorate recipients by State</b>")
+
+
+
 
 st.plotly_chart(fig2, use_container_width=True)
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
@@ -277,7 +290,7 @@ df3 = pd.read_excel('sed17-sr-tab004.xlsx')
 
 
 
-
+"""This code is to remove the first 5 rows from the dataframe and change the column names for the dataframe"""
 
 df3 = df3.iloc[5:]
 df3.columns = ['Top20_Institution', 'Rank', 'Doctorate_recipients']
@@ -290,14 +303,14 @@ df3 = df3.head(20)
 #Code for third dashboard
 
 st.title("A pie chart dashboard showing the number of doctorate recipients in the field of life sciences of top 20 Institution in 2017")
-st.markdown("This dashboard will help a researcher to better understandhow the total number of Doctorate recipients in the field of life sciences of each institution from the top 20 institutions is different from each other in 2017 ")
+st.markdown("This dashboard will help a researcher to better understand how the total number of Doctorate recipients in the field of life sciences of each institution from the top 20 institutions is different from each other in 2017 ")
 
 
 # In[53]:
 
 
 
-
+"""This is the important code that can generate the pie chart dashboard"""
 
 
 fig3 = px.pie(df3, values=df3.Doctorate_recipients, names=df3.Top20_Institution, color=df3.Top20_Institution,
@@ -309,36 +322,14 @@ fig3 = px.pie(df3, values=df3.Doctorate_recipients, names=df3.Top20_Institution,
 # In[54]:
 
 
+"""Add the plot title here to make the dashboard clear to users"""
+
 fig3.update_layout(
     
 title="<b>Top 20 Institutions in the life sciences field</b>")
 
 
 st.plotly_chart(fig3)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
