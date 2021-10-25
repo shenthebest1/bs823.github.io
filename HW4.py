@@ -55,7 +55,7 @@ st.markdown("The dashboard will help a researcher to get to understand the trend
 # In[7]:
 
 
-"""Here is the code to set up the selection box for the first dashboard"""
+#Here is the code to set up the selection box for the first dashboard
 chart_visual = st.selectbox(
     label="Select Charts/Plot type", options=['Line Chart', 'Bar Chart', 'Bubble Chart']
 )
@@ -68,8 +68,8 @@ fig = go.Figure()
   
     
 
-"""Set the if elseif function here to check whether the users choose Line Chart, Bar Chart or Bubble Chart,
-the first chunk here is for the line chart"""    
+#Set the if elseif function here to check whether the users choose Line Chart, Bar Chart or Bubble Chart,
+#the first chunk here is for the line chart  
 if chart_visual == 'Line Chart':
 
     fig.add_trace(go.Scatter(x = df1.Year, y = df1.Doctorate_recipients,
@@ -77,12 +77,14 @@ if chart_visual == 'Line Chart':
                              ))
     
     
+#Here is the chunk code for bar chart
 
 elif chart_visual == 'Bar Chart':
     
     fig.add_trace(go.Bar(x = df1.Year, y = df1.Doctorate_recipients,
                              ))
 
+#Here is the chunk code for Bubble chart
 
 elif chart_visual == 'Bubble Chart':
   
@@ -98,7 +100,7 @@ st.plotly_chart(fig, use_container_width=True)
 # In[9]:
 
 
-"""Code for second dashboard start from here"""
+#Code for second dashboard start from here
 
 st.title("Percentage change of total number of Doctorate recipients from 1958 to 2017 Dashboard")
 st.markdown("The dashboard will help a researcher to better understand how the percentage change of total number of Doctorate recipients through 1958 to 2017 ")
@@ -107,7 +109,8 @@ st.markdown("The dashboard will help a researcher to better understand how the p
 # In[10]:
 
 
-"""Here is the code to set up the selection box for the second dashboard"""
+#Here is the code to set up the selection box for the second dashboard
+
 chart_visual1 = st.selectbox(
     label="Select Charts type", options=['line Chart', 'bar Chart', 'Bubble Chart']
 )
@@ -121,8 +124,8 @@ chart_visual1 = st.selectbox(
 fig1 = go.Figure()
   
     
-"""Set the if elseif function here to check whether the users choose Line Chart, Bar Chart or Bubble Chart, the first chunk
-here is for the line chart""" 
+#Set the if elseif function here to check whether the users choose Line Chart, Bar Chart or Bubble Chart, the first chunk
+#here is for the line chart
     
 if chart_visual1 == 'line Chart':
 
@@ -130,6 +133,7 @@ if chart_visual1 == 'line Chart':
                              mode = 'lines',
                              ))
 
+#This chunk of code is for bar chart
 
 elif chart_visual1 == 'bar Chart':
     
@@ -137,6 +141,7 @@ elif chart_visual1 == 'bar Chart':
                              ))
     
     
+#This chun of code is for Bubble chart
 
 elif chart_visual1 == 'Bubble Chart':
   
@@ -144,7 +149,7 @@ elif chart_visual1 == 'Bubble Chart':
                              y=df1.percentage_change,
                              mode='markers',
                             ))
-        
+plotly        
         
 st.plotly_chart(fig1, use_container_width=True)
 
@@ -165,14 +170,14 @@ df2 = pd.read_excel('sed17-sr-tab005.xlsx')
 # In[4]:
 
 
-"""Remove the first three rows of the dataframe"""
+#Remove the first three rows of the dataframe
 df2 = df2.iloc[3:]
 
 
 # In[5]:
 
 
-"""Rename the dataframe columns"""
+#Rename the dataframe columns
 df2.columns = ['State', 'Rank', 'Doctorate recipients']
 
 
@@ -188,7 +193,7 @@ st.markdown("The dashboard will help a researcher to better understand how the t
 # In[24]:
 
 
-"""associate the abbreviation to each state"""
+#associate the abbreviation to each state
 state = {'Alabama': 'AL',
         'Alaska': 'AK',
         'Arizona': 'AZ',
@@ -244,8 +249,8 @@ state = {'Alabama': 'AL',
 df2['S'] = df2['State'].map(state)
 
 
-"""Use the px.choropleth function to use the US map and then insert df2 to make the US map reflect information about our
-datadrame, use color to make each state has different color. """
+#Use the px.choropleth function to use the US map and then insert df2 to make the US map reflect information about our
+#datadrame, use color to make each state has different color. 
 fig2 = px.choropleth(df2,
                     locations='S',
                     locationmode='USA-states',
@@ -254,7 +259,7 @@ fig2 = px.choropleth(df2,
                     scope='usa')
 
 
-"""Assign the abbreviation of each state on the map"""
+#Assign the abbreviation of each state on the map
 fig2.add_scattergeo(
     text=df2['S'],
     locations=df2['S'],
@@ -262,7 +267,7 @@ fig2.add_scattergeo(
     mode='text')
 
 
-"""Assign a title for this dashboard"""
+#Assign a title for this dashboard
 fig2.update_layout(
     
 title="<b>An USA map of Number of doctorate recipients by State</b>")
@@ -290,7 +295,7 @@ df3 = pd.read_excel('sed17-sr-tab004.xlsx')
 
 
 
-"""This code is to remove the first 5 rows from the dataframe and change the column names for the dataframe"""
+#This code is to remove the first 5 rows from the dataframe and change the column names for the dataframe
 
 df3 = df3.iloc[5:]
 df3.columns = ['Top20_Institution', 'Rank', 'Doctorate_recipients']
@@ -310,7 +315,7 @@ st.markdown("This dashboard will help a researcher to better understand how the 
 
 
 
-"""This is the important code that can generate the pie chart dashboard"""
+#This is the important code that can generate the pie chart dashboard
 
 
 fig3 = px.pie(df3, values=df3.Doctorate_recipients, names=df3.Top20_Institution, color=df3.Top20_Institution,
@@ -322,7 +327,7 @@ fig3 = px.pie(df3, values=df3.Doctorate_recipients, names=df3.Top20_Institution,
 # In[54]:
 
 
-"""Add the plot title here to make the dashboard clear to users"""
+#Add the plot title here to make the dashboard clear to users
 
 fig3.update_layout(
     
