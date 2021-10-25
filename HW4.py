@@ -149,7 +149,7 @@ elif chart_visual1 == 'Bubble Chart':
                              y=df1.percentage_change,
                              mode='markers',
                             ))
-plotly        
+     
         
 st.plotly_chart(fig1, use_container_width=True)
 
