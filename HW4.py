@@ -130,7 +130,6 @@ if chart_visual1 == 'line Chart':
                              mode = 'lines',
                              ))
 
-"""This chunk of code is for bar chart"""
 
 elif chart_visual1 == 'bar Chart':
     
@@ -138,7 +137,6 @@ elif chart_visual1 == 'bar Chart':
                              ))
     
     
-"""This chun of code is for Bubble chart"""
 
 elif chart_visual1 == 'Bubble Chart':
   
