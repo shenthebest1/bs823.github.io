@@ -151,7 +151,7 @@ st.markdown("The dashboard will help a researcher to better understandhow the pe
 
 
 chart_visual1 = st.selectbox(
-    label="Select Charts/Plot type", options=['Line Chart', 'Bar Chart', 'Bubble Chart']
+    label="Select Charts type", options=['Bar Chart', 'Line Chart', 'Bubble Chart']
 )
 
 
