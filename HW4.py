@@ -311,14 +311,14 @@ st.plotly_chart(fig2, use_container_width=True)
 
 
 
-# In[42]:
+# In[48]:
 
 
 #Load the third dataset
 df3 = pd.read_excel('sed17-sr-tab004.xlsx')
 
 
-# In[43]:
+# In[49]:
 
 
 
@@ -326,15 +326,26 @@ df3 = pd.read_excel('sed17-sr-tab004.xlsx')
 
 df3 = df3.iloc[5:]
 df3.columns = ['Top20_Institution', 'Rank', 'Doctorate_recipients']
-df3 = df3.head(3)
+df3 = df3.head(20)
 df3
+
+
+# In[ ]:
+
+
+#Code for third dashboard
+
+st.title("A pie chart dashboard showing the number of doctorate recipients of top 20 Institution in 2017")
+st.markdown("This dashboard will help a researcher to better understandhow the total number of Doctorate recipients of each institution from the top 20 institutions is different from each other in 2017 ")
 
 
 # In[45]:
 
 
 fig3 = px.pie(df3, values=df3.Doctorate_recipients, names=df3.Top20_Institution, color=df3.Top20_Institution,
-color_discrete_map={'Johns Hopkins U.':'cyan', 'U. Wisconsin-Madison':'royalblue','U. Florida':'darkblue'})
+              
+#color_discrete_map={'Johns Hopkins U.':'cyan', 'U. Wisconsin-Madison':'royalblue','U. Florida':'darkblue'}
+             )
 
 
 
