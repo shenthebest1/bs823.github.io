@@ -150,7 +150,7 @@ st.markdown("The dashboard will help a researcher to better understandhow the pe
 # In[ ]:
 
 
-chart_visual = st.selectbox(
+chart_visual1 = st.selectbox(
     label="Select Charts/Plot type", options=['Line Chart', 'Bar Chart', 'Bubble Chart']
 )
 
@@ -165,18 +165,18 @@ fig1 = go.Figure()
     
 
     
-if chart_visual == 'Line Chart':
+if chart_visual1 == 'Line Chart':
 
     fig.add_trace(go.Scatter(x = df1.Year, y = df1.percentage_change,
                              mode = 'lines',
                              ))
 
-elif chart_visual == 'Bar Chart':
+elif chart_visual1 == 'Bar Chart':
     
     fig.add_trace(go.Bar(x = df1.Year, y = df1.percentage_change,
                              ))
 
-elif chart_visual == 'Bubble Chart':
+elif chart_visual1 == 'Bubble Chart':
   
     fig.add_trace(go.Scatter(x=df1.Year, 
                              y=df1.percentage_change,
