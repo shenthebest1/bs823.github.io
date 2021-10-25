@@ -131,7 +131,7 @@ elif chart_visual == 'Bubble Chart':
     fig.add_trace(go.Scatter(x=df1.Year, 
                              y=df1.Doctorate_recipients,
                              mode='markers',
-#                             marker_size=[40, 60, 80, 60, 40, 50],
+
                             ))
         
         
@@ -181,7 +181,7 @@ elif chart_visual1 == 'Bubble Chart':
     fig1.add_trace(go.Scatter(x=df1.Year, 
                              y=df1.percentage_change,
                              mode='markers',
-                             marker_size=[40, 60, 80, 60, 40, 50],
+
                             ))
         
         
