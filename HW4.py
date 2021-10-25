@@ -15,59 +15,20 @@ import plotly.graph_objects as go
 #import matplotlib.pyplot as plt
 
 
-# In[53]:
+# In[ ]:
 
 
-#df = pd.read_excel("sed17-sr-tab046.xlsx")
-
-
-# In[54]:
-
-
-#df
-
-
-# In[55]:
-
-
-#df.dropna()
-
-
-# In[57]:
-
-
-#df = df.rename(columns={'Unnamed: 1': 'Total', 'Unnamed: 2': 'Life sciences', 'Unnamed: 3': 'Physical sciences and earth sciences','Unnamed: 4': 'Mathematics and computer sciences',
-#                        'Unnamed: 5': 'Psychology and social sciences','Unnamed: 6': 'Engineering','Unnamed: 7': 'Education','Unnamed: 8': 'Humanities and arts',
-#                        'Unnamed: 9': 'others'})
-#df
-
-
-# In[58]:
-
-
-#df = df.iloc[1: , :]
-#df
-
-
-# In[59]:
-
-
-#df = df.iloc[1: , :]
-#df
-
-
-# In[60]:
-
-
-#df = df.iloc[1: , :]
-#df
+st.write("""
+# Biostatistics 823 HW4 
+### by Jiajie Shen
+""")
 
 
 # In[21]:
 
 
 
-
+#Load the first dataset and name it as df1
 
 df1 = pd.read_excel('sed17-sr-tab001.xlsx')
 
@@ -90,10 +51,6 @@ df1 = df1.iloc[3:]
 
 st.title("Number of Doctorate recipients from 1958 to 2017 Dashboard")
 st.markdown("The dashboard will help a researcher to get to understand the trend of number of doctorate recipients from 1958 to 2017 in The USA")
-#st.sidebar.title("Select Visual Charts")
-#st.sidebar.markdown("Select the Charts/Plots accordingly:")
-
-
 
 
 # In[7]:
@@ -129,7 +86,6 @@ elif chart_visual == 'Bubble Chart':
     fig.add_trace(go.Scatter(x=df1.Year, 
                              y=df1.Doctorate_recipients,
                              mode='markers',
-#                             marker_size=[40, 60, 80, 60, 40, 50],
                             ))
         
         
@@ -179,7 +135,6 @@ elif chart_visual1 == 'Bubble Chart':
     fig1.add_trace(go.Scatter(x=df1.Year, 
                              y=df1.percentage_change,
                              mode='markers',
-#                             marker_size=[40, 60, 80, 60, 40, 50],
                             ))
         
         
@@ -278,7 +233,7 @@ state = {'Alabama': 'AL',
 df2['U'] = df2['State'].map(state)
 fig2 = px.choropleth(df2,
                     locations='U',
-                    color='Doctorate recipients',
+                    color='State',
                     #color_continuous_scale='spectral_r',
                     hover_name='State',
                     locationmode='USA-states',
@@ -311,14 +266,14 @@ st.plotly_chart(fig2, use_container_width=True)
 
 
 
-# In[48]:
+# In[50]:
 
 
 #Load the third dataset
 df3 = pd.read_excel('sed17-sr-tab004.xlsx')
 
 
-# In[49]:
+# In[51]:
 
 
 
@@ -327,37 +282,36 @@ df3 = pd.read_excel('sed17-sr-tab004.xlsx')
 df3 = df3.iloc[5:]
 df3.columns = ['Top20_Institution', 'Rank', 'Doctorate_recipients']
 df3 = df3.head(20)
-df3
 
 
-# In[ ]:
+# In[52]:
 
 
 #Code for third dashboard
 
-st.title("A pie chart dashboard showing the number of doctorate recipients of top 20 Institution in 2017")
-st.markdown("This dashboard will help a researcher to better understandhow the total number of Doctorate recipients of each institution from the top 20 institutions is different from each other in 2017 ")
+st.title("A pie chart dashboard showing the number of doctorate recipients in the field of life sciences of top 20 Institution in 2017")
+st.markdown("This dashboard will help a researcher to better understandhow the total number of Doctorate recipients in the field of life sciences of each institution from the top 20 institutions is different from each other in 2017 ")
 
 
-# In[45]:
+# In[53]:
+
+
+
+
 
 
 fig3 = px.pie(df3, values=df3.Doctorate_recipients, names=df3.Top20_Institution, color=df3.Top20_Institution,
               
-#color_discrete_map={'Johns Hopkins U.':'cyan', 'U. Wisconsin-Madison':'royalblue','U. Florida':'darkblue'}
+
              )
 
 
-
-
-
-
-
-# In[46]:
+# In[54]:
 
 
 fig3.update_layout(
-title="<b>Top 20 Institutions</b>")
+    
+title="<b>Top 20 Institutions in the life sciences field</b>")
 
 
 st.plotly_chart(fig3)
