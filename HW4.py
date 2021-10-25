@@ -63,6 +63,12 @@ import plotly.graph_objects as go
 #df
 
 
+# In[33]:
+
+
+st.sidebar.title("Visualization Selector for Number of Doctorate recipients from 1958 to 2017 Dashboard")
+
+
 # In[3]:
 
 
@@ -131,7 +137,7 @@ elif chart_visual == 'Bubble Chart':
     fig.add_trace(go.Scatter(x=df1.Year, 
                              y=df1.Doctorate_recipients,
                              mode='markers',
-
+#                             marker_size=[40, 60, 80, 60, 40, 50],
                             ))
         
         
@@ -181,7 +187,7 @@ elif chart_visual1 == 'Bubble Chart':
     fig1.add_trace(go.Scatter(x=df1.Year, 
                              y=df1.percentage_change,
                              mode='markers',
-
+#                             marker_size=[40, 60, 80, 60, 40, 50],
                             ))
         
         
@@ -194,22 +200,110 @@ st.plotly_chart(fig1, use_container_width=True)
 
 
 
+# In[14]:
+
+
+df2 = pd.read_excel('sed17-sr-tab005.xlsx')
+
+
+# In[16]:
+
+
+df2 = df2.iloc[3:]
+
+
+# In[17]:
+
+
+df2.columns = ['State', 'Rank', 'Doctorate recipients']
+
+
 # In[ ]:
 
 
+#Code for third dashboard
+
+st.title("Percentage change of total number of Doctorate recipients from 1958 to 2017 Dashboard")
+st.markdown("The dashboard will help a researcher to better understandhow the percentage change of total number of Doctorate recipients through 1958 to 2017 ")
 
 
-
-# In[ ]:
-
+# In[20]:
 
 
+state = {'Alabama': 'AL',
+        'Alaska': 'AK',
+        'Arizona': 'AZ',
+        'Arkansas': 'AR',
+        'California': 'CA',
+        'Colorado': 'CO',
+        'Connecticut': 'CT',
+        'Delaware': 'DE',
+        'District of Columbia': 'DC',
+        'Florida': 'FL',
+        'Georgia': 'GA',
+        'Hawaii': 'HI',
+        'Idaho': 'ID',
+        'Illinois': 'IL',
+        'Indiana': 'IN',
+        'Iowa': 'IA',
+        'Kansas': 'KS',
+        'Kentucky': 'KY',
+        'Louisiana': 'LA',
+        'Maine': 'ME',
+        'Maryland': 'MD',
+        'Massachusetts': 'MA',
+        'Michigan': 'MI',
+        'Minnesota': 'MN',
+        'Mississippi': 'MS',
+        'Missouri': 'MO',
+        'Montana': 'MT',
+        'Nebraska': 'NE',
+        'Nevada': 'NV',
+        'New Hampshire': 'NH',
+        'New Jersey': 'NJ',
+        'New Mexico': 'NM',
+        'New York': 'NY',
+        'North Carolina': 'NC',
+        'North Dakota': 'ND',
+        'Ohio': 'OH',
+        'Oklahoma': 'OK',
+        'Oregon': 'OR',
+        'Pennsylvania': 'PA',
+        'Rhode Island': 'RI',
+        'South Carolina': 'SC',
+        'South Dakota': 'SD',
+        'Tennessee': 'TN',
+        'Texas': 'TX',
+        'Utah': 'UT',
+        'Vermont': 'VT',
+        'Virginia': 'VA',
+        'Washington': 'WA',
+        'West Virginia': 'WV',
+        'Wisconsin': 'WI',
+        'Wyoming': 'WY'}
 
+df2['U'] = df2['State'].map(state)
+fig2 = px.choropleth(df2,
+                    locations='U',
+                    color='Doctorate recipients',
+                    color_continuous_scale='spectral_r',
+                    hover_name='State',
+                    locationmode='USA-states',
+                    scope='usa')
 
-# In[ ]:
+fig2.add_scattergeo(
+    locations=df2['U'],
+    locationmode='USA-states',
+    text=df2['U'],
+    mode='text')
 
+fig2.update_layout(
+    title={'text':'Fig 2. An USA map of Number of doctorate recipients by State',
+           'xanchor':'center',
+           'yanchor':'top',
+           'x':0.5})
 
-
+st.plotly_chart(fig2, use_container_width=True)
 
 
 # In[ ]:
