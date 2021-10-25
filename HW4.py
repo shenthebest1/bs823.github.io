@@ -97,10 +97,9 @@ df1
 
 
 st.title("Number of Doctorate recipients from 1958 to 2017 Dashboard")
-#st.markdown("The dashboard will help a researcher to get to know \
-#more about the given datasets and it's output")
-st.sidebar.title("Select Visual Charts")
-st.sidebar.markdown("Select the Charts/Plots accordingly:")
+st.markdown("The dashboard will help a researcher to get to understand the trend of number of doctorate recipients from 1958 to 2017 in The USA")
+#st.sidebar.title("Select Visual Charts")
+#st.sidebar.markdown("Select the Charts/Plots accordingly:")
 
 
 
@@ -108,8 +107,12 @@ st.sidebar.markdown("Select the Charts/Plots accordingly:")
 # In[38]:
 
 
-chart_visual = st.sidebar.selectbox('Select Charts/Plot type', 
-                                    ('Line Chart', 'Bar Chart', 'Bubble Chart'))
+#chart_visual = st.sidebar.selectbox('Select Charts/Plot type', 
+#                                    ('Line Chart', 'Bar Chart', 'Bubble Chart'))
+
+chart_visual = st.selectbox(
+    label="Select Charts/Plot type", options=['Line Chart', 'Bar Chart', 'Bubble Chart']
+)
 
 
 # In[42]:
@@ -147,8 +150,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 st.title("Percentage change of total number of Doctorate recipients from 1958 to 2017 Dashboard")
-#st.markdown("The dashboard will help a researcher to get to know \
-#more about the given datasets and it's output")
+st.markdown("The dashboard will help a researcher to better understandhow the percentage change of total number of Doctorate recipients through 1958 to 2017 ")
 #st.sidebar.title("Select Visual Charts")
 #st.sidebar.markdown("Select the Charts/Plots accordingly:")
 
@@ -165,9 +167,9 @@ fig1 = go.Figure()
     
 #chart_visual == 'Line Chart':
 
-    fig.add_trace(go.Scatter(x = df1.Year, y = df1.percentage_change,
-                             mode = 'lines',
-                             ))
+fig.add_trace(go.Scatter(x = df1.Year, y = df1.percentage_change,
+                         mode = 'lines',
+                        ))
 
 #elif chart_visual == 'Bar Chart':
     
