@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[4]:
+# In[2]:
 
 
 
@@ -63,7 +63,7 @@ import plotly.graph_objects as go
 #df
 
 
-# In[34]:
+# In[3]:
 
 
 
@@ -72,14 +72,14 @@ import plotly.graph_objects as go
 df1 = pd.read_excel('sed17-sr-tab001.xlsx')
 
 
-# In[35]:
+# In[4]:
 
 
 df1.columns = ['Year', 'Doctorate_recipients', 'percentage_change']
 df1
 
 
-# In[36]:
+# In[5]:
 
 
 df1 = df1.iloc[3:]
@@ -87,7 +87,7 @@ df1 = df1.iloc[3:]
 df1
 
 
-# In[37]:
+# In[6]:
 
 
 st.title("Number of Doctorate recipients from 1958 to 2017 Dashboard")
@@ -98,7 +98,7 @@ st.markdown("The dashboard will help a researcher to get to understand the trend
 
 
 
-# In[38]:
+# In[7]:
 
 
 
@@ -107,7 +107,7 @@ chart_visual = st.selectbox(
 )
 
 
-# In[42]:
+# In[8]:
 
 
 fig = go.Figure()
@@ -138,7 +138,7 @@ elif chart_visual == 'Bubble Chart':
 st.plotly_chart(fig, use_container_width=True)
 
 
-# In[46]:
+# In[9]:
 
 
 #Code for second dashboard
@@ -147,15 +147,15 @@ st.title("Percentage change of total number of Doctorate recipients from 1958 to
 st.markdown("The dashboard will help a researcher to better understandhow the percentage change of total number of Doctorate recipients through 1958 to 2017 ")
 
 
-# In[ ]:
+# In[10]:
 
 
 chart_visual1 = st.selectbox(
-    label="Select Charts type", options=['Bar Chart', 'Line Chart', 'Bubble Chart']
+    label="Select Charts type", options=['line Chart', 'bar Chart', 'Bubble Chart']
 )
 
 
-# In[51]:
+# In[11]:
 
 
 
@@ -165,13 +165,13 @@ fig1 = go.Figure()
     
 
     
-if chart_visual1 == 'Line Chart':
+if chart_visual1 == 'line Chart':
 
     fig.add_trace(go.Scatter(x = df1.Year, y = df1.percentage_change,
                              mode = 'lines',
                              ))
 
-elif chart_visual1 == 'Bar Chart':
+elif chart_visual1 == 'bar Chart':
     
     fig.add_trace(go.Bar(x = df1.Year, y = df1.percentage_change,
                              ))
