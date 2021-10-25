@@ -78,12 +78,14 @@ if chart_visual == 'Line Chart':
     
     
 """Here is the chunk code for bar chart"""
+
 elif chart_visual == 'Bar Chart':
     
     fig.add_trace(go.Bar(x = df1.Year, y = df1.Doctorate_recipients,
                              ))
 
 """Here is the chunk code for Bubble chart"""
+
 elif chart_visual == 'Bubble Chart':
   
     fig.add_trace(go.Scatter(x=df1.Year, 
@@ -131,6 +133,7 @@ if chart_visual1 == 'line Chart':
                              ))
 
 """This chunk of code is for bar chart"""
+
 elif chart_visual1 == 'bar Chart':
     
     fig1.add_trace(go.Bar(x = df1.Year, y = df1.percentage_change,
@@ -138,6 +141,7 @@ elif chart_visual1 == 'bar Chart':
     
     
 """This chun of code is for Bubble chart"""
+
 elif chart_visual1 == 'Bubble Chart':
   
     fig1.add_trace(go.Scatter(x=df1.Year, 
