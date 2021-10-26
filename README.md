@@ -151,8 +151,6 @@ If we use 1 to let the algorithm expand then have the following as our algorithm
 
 Finally, we use the same method to get the result of 100, so we get the result is 190569291. This is a very complex loop to get the result. 
 
-
-
 <br />
 <br />
 <br />
@@ -251,11 +249,10 @@ def prime_pi(p,dig):
 
 ### Answer: The first 10-digit prime in the decimal expansion of 17π is 8649375157 from my code. 
 
+<br />
+<br />
 
 
-<br />
-<br />
-<br />
 
 
 
@@ -385,6 +382,279 @@ alt.Chart(data=data3).mark_point().encode(
 ### explanation to the graph: From this graph, we can see that there are some countries have very low incidence of malaria such as Thailand, Vietnam, South Korea. There are also some countries have relatively high incidence of malaria such as Ethiopia, Liberia and Turky. And we can see there is a huge outlier in Turkey. The difference of incidence of malaria between countries is based on the measures they take or the spreadness of malaria to this country. 
 
 
+<br />
+<br />
 
 
 
+# HW4
+
+### Assignment task: Download data of Science and Engineering PhDs awarded in the US. Do some analysis in pandas. Make a dashboard visualization of a few interesting aspects of the data.
+
+<br />
+
+I used streamlit to generate the dashboard for the visulization. And the my result can be found through the following link:
+https://share.streamlit.io/shenthebest1/bs823.github.io/main/HW4.py
+
+<br />
+
+The very first step is always to import all the packages that we will use for this project
+
+```
+import streamlit as st
+import pandas as pd
+import numpy as np
+import plotly.express as px
+import json
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+
+```
+
+
+
+<br />
+
+1 The first dashboard on my streamlit website is for Number of Doctorate recipients from 1958 to 2017 Dashboard. It is an interesting dashboard that can reproduce the dataset into three different plots including: Line chart, Bar chart and Bubble chart. There is a selection box on the streamlit website for users to choose from the three different plots. Users have the chance to make choice upon which charts they like the most so the dashboard will generate the plot they want. 
+
+This dashboard will help a researcher to get to understand the trend of number of doctorate recipients from 1958 to 2017 in The USA, from the line chart of this dashboard. Also, when users point their mouse at any point of the line, the dashboard will show that what year is the specific point and how many doctorate recipients in that year. And it is the same thing for the other two types of charts. it is very clear to see that there is an increasing trend for number of Doctorate recipients from 1958 to 2017 in the USA. Especially from 1960s to 1970s, the number of doctorate recipients has even been tripled.
+
+Thus, this dashboard helps us a lot to make the conclusion that there is an increasing trend for number of Doctorate recipients from 1958 to 2017 in the USA. This interactive dashboard is really user-friendly which make researchers have better efficiency to gain information. 
+
+<br />
+
+##### Load the dataset for the first dashboard named df1
+```
+#Load the first dataset and name it as df1
+
+df1 = pd.read_excel('sed17-sr-tab001.xlsx')
+
+```
+
+
+```
+
+"""Here is the code to set up the selection box for the first dashboard"""
+
+chart_visual = st.selectbox(
+    label="Select Charts/Plot type", options=['Line Chart', 'Bar Chart', 'Bubble Chart']
+)
+
+
+```
+
+##### Explanation: This is the code to generate the selection box for the first dashboard, so the users can choose from Line chart, bar chart and bubble chart. And the following code is to actually generate each different plot. 
+
+<br />
+
+```
+fig = go.Figure()
+  
+    
+
+"""Set the if elseif function here to check whether the users choose Line Chart, Bar Chart or Bubble Chart, the first chunk
+here is for the line chart"""    
+if chart_visual == 'Line Chart':
+
+    fig.add_trace(go.Scatter(x = df1.Year, y = df1.Doctorate_recipients,
+                             mode = 'lines',
+                             ))
+    
+    
+"""Here is the chunk code for bar chart"""
+elif chart_visual == 'Bar Chart':
+    
+    fig.add_trace(go.Bar(x = df1.Year, y = df1.Doctorate_recipients,
+                             ))
+
+"""Here is the chunk code for Bubble chart"""
+elif chart_visual == 'Bubble Chart':
+  
+    fig.add_trace(go.Scatter(x=df1.Year, 
+                             y=df1.Doctorate_recipients,
+                             mode='markers',
+                            ))
+        
+        
+st.plotly_chart(fig, use_container_width=True)
+
+```
+##### Explanation: The above code is to generate the three different parts of the plots. If the user select line chart in the slection box, then the dashboard will generate a line chart; if the user select bar chart, the dashboard will generate bar chart; and if user select bubble chart it will genernate bubble chart. This dashboard can help users to detect Number of Doctorate recipients from 1958 to 2017 in the USA. 
+
+<br />
+
+![Dashboard1](https://user-images.githubusercontent.com/78027134/138784390-03e5012e-1168-45b7-833f-d34f9430c9a7.png)
+
+<br />
+<br />
+
+2 The second dashboard on my streamlit website is for percentage change of Number of Doctorate recipients from 1958 to 2017. It is also an interesting dashboard that can reproduce the dataset into three different plots including: Line chart, Bar chart and Bubble chart. There is a selection box on the streamlit website so users can choose from different plots. Users have the chance to make choice that which charts they like the most so the dashboard will generate the plot they want. 
+
+
+The dashboard will help a researcher to better understand how the percentage change of total number of Doctorate recipients through 1958 to 2017 in the USA. We can use the Bubble chart as an example, when users point their mouse at any bar of the plot, the dashboard will show that what year is the specific point and what is the percentage change of doctorate recipients in that year. And it is the same thing for the other two different types of charts. it is very clear to see that there is an increasing trend from 1960 to 1970. There are more and more people getting doctorate degrees at that time. And from 1970 to 1980; also during 2000 and 2010 it is obvious to see that the percentage change is negative. During that time, there are less people getting doctorate degrees. 
+
+
+Thus, this dashboard helps researchers a lot to make the conclusion about specific time that the percentage change of number of Doctorate recipients from 1958 to 2017 in the USA. This interactive dashboard is really user-friendly which make researchers have better efficiency to gain information. And it is also an informative dashboard for students who want to get a doctorate degree in the future. 
+
+
+```
+"""Here is the code to set up the selection box for the second dashboard"""
+chart_visual1 = st.selectbox(
+    label="Select Charts type", options=['line Chart', 'bar Chart', 'Bubble Chart']
+)
+```
+
+##### Explanation: The dataframe we use for second dashboard is the same as the first dashboard. And this is the code to generate the selection box for the second dashboard, so the users can choose from Line chart, bar chart and bubble chart. And the following code is to actually generate each different plot. 
+
+
+```
+
+fig1 = go.Figure()
+  
+    
+"""Set the if elseif function here to check whether the users choose Line Chart, Bar Chart or Bubble Chart, the first chunk
+here is for the line chart""" 
+    
+if chart_visual1 == 'line Chart':
+
+    fig1.add_trace(go.Scatter(x = df1.Year, y = df1.percentage_change,
+                             mode = 'lines',
+                             ))
+
+"""This chunk of code is for bar chart"""
+elif chart_visual1 == 'bar Chart':
+    
+    fig1.add_trace(go.Bar(x = df1.Year, y = df1.percentage_change,
+                             ))
+    
+    
+"""This chun of code is for Bubble chart"""
+elif chart_visual1 == 'Bubble Chart':
+  
+    fig1.add_trace(go.Scatter(x=df1.Year, 
+                             y=df1.percentage_change,
+                             mode='markers',
+                            ))
+        
+        
+st.plotly_chart(fig1, use_container_width=True)
+
+```
+
+##### Explanation: The above code is to generate the three different parts of the plots. If the user select line chart in the slection box, then the dashboard will generate a line chart; if the user select bar chart, the dashboard will generate bar chart; and if user select bubble chart it will genernate bubble chart. This dashboard can help users to better understand how the percentage change of total number of Doctorate recipients through 1958 to 2017 in the USA. It is also helpful for people to make decision on whether they want to get a doctorate degree.
+
+<br />
+
+![Dashboard2](https://user-images.githubusercontent.com/78027134/138798133-d6e4533a-0f01-484e-9b7c-6d0d52e3c85e.png)
+
+<br />
+<br />
+<br />
+
+3 The third dashboard on my streamlit website is an US map showing the number of doctorate recipients of each state in 2017. The US map is with all states in different colors. When the user point his mouse on the state, then there will shown the number of doctorate recipients in each state in the year of 2017. For example, if we put our mouse on the state of Texas, then we have the number of 4068 for this state. This is a very straightforward dashboard for us to see that how many doctorate recipients in each state in the year of 2017. so users can have a basic idea that which is state has the most people getting Phd degrees. 
+
+
+Thus, this dashboard helps researchers a lot to make the conclusion about the total number of Doctorate recipients from each state is different from each other in 2017. This interactive dashboard is really user-friendly which make researchers have better efficiency to gain information. And it is also an informative dashboard for students and professors to do research about the number of doctorate recipients in each state through the years. 
+
+<br />
+
+##### I load the the second dataset that will generate the third dashboard
+```
+#Load the second dataset
+df2 = pd.read_excel('sed17-sr-tab005.xlsx')
+
+```
+
+
+
+```
+"""Use the px.choropleth function to use the US map and then insert df2 to make the US map reflect information about our
+datadrame, use color to make each state has different color. """
+fig2 = px.choropleth(df2,
+                    locations='S',
+
+                    locationmode='USA-states',
+                    hover_name='State',
+                    color='Doctorate recipients',
+                    scope='usa')
+
+
+"""Assign the abbreviation of each state on the map"""
+fig2.add_scattergeo(
+    text=df2['S'],
+    locations=df2['S'],
+    locationmode='USA-states',
+    mode='text')
+```
+
+##### Explanation: The above code is to select the USA map and then combine the dataframe inside of the map to reflect the number of doctorate recipients in each of the state. And we use function to distinguish the different states so we use different colors on different states. And the code that can have the function that when user point mouse on each state, the interative dashboard can reflect the information of each state in the year of 2017. This dashboarrd is very user-friendly to make users have more convenience. 
+
+
+<br />
+
+![Dashboard3](https://user-images.githubusercontent.com/78027134/138798346-ed320d27-fe4f-4bc6-a0ce-018c748a864c.png)
+
+
+
+
+
+<br />
+<br />
+
+4 The last dashboard on my streamlit website is a pie chart showing the number of doctorate recipients in the field of life sciences of top 20 Institution in 2017. It is an interactive pie chart for user to have fun with it. If you are the people who are very interested in the field of life science and would like to get a dcotorate degree in this filed then this plot is very important to you. It is showing the top list of the institutions that have the most doctorare recipients in the field of life science.
+
+When users point their mouse upon each slice of the pie chart. For example, We have 244 doctorate recipiencet in life sicence field from Johns Hopkins University. If you are interested in a specific institution, you can point on the slice and see the number. This result may help your doctorate applictaion on that institution. 
+
+
+This interactive pie chart dashboard is very user-friendly which can let both researchers and students efficiently gain information. The information can help people make better decision on their research!
+
+
+##### I load the third dataset that will be used for the last dashboard
+```
+#Load the third dataset
+df3 = pd.read_excel('sed17-sr-tab004.xlsx')
+```
+
+```
+
+"""This code is to remove the first 5 rows from the dataframe and change the column names for the dataframe"""
+
+df3 = df3.iloc[5:]
+df3.columns = ['Top20_Institution', 'Rank', 'Doctorate_recipients']
+df3 = df3.head(20)
+
+```
+
+##### Explanation: The above code is to make edition to the dataframe df3 in order to extract the data we want. The dashboard I will create is based on the dataframe that I extracted from here. 
+
+
+```
+
+"""This is the important code that can generate the pie chart dashboard"""
+
+
+fig3 = px.pie(df3, values=df3.Doctorate_recipients, names=df3.Top20_Institution, color=df3.Top20_Institution,
+              
+
+             )
+
+
+"""Add the plot title here to make the dashboard clear to users"""
+fig3.update_layout(
+    
+title="<b>Top 20 Institutions in the life sciences field</b>")
+
+
+st.plotly_chart(fig3)
+```
+
+##### Explanation: The code above is to generate the pie chart dashboard, and this is the dashboard to help a researcher to better understand how the total number of Doctorate recipients in the field of life sciences of each institution from the top 20 institutions is different from each other in 2017. This dashboard is also informative for student who want to apply for a doctorate degree in the field of life science. 
+
+
+<br />
+
+![Dashboard4](https://user-images.githubusercontent.com/78027134/138800856-d3dadc24-72b3-4159-abe8-34644867e9a6.png)
+
+
+<br />
+<br />
