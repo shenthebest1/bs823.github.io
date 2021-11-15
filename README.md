@@ -658,3 +658,208 @@ st.plotly_chart(fig3)
 
 <br />
 <br />
+
+
+
+
+
+# HW5
+
+### Assignment task: Train a deep learning model to classify beetles, cockroaches and dragonflies using these images. Note: Original images from https://www.insectimages.org/index.cfm. explain how the neural network classified the images using Shapley Additive exPlanations.
+
+
+The very first step is always to import all the packages that we will use for this project, I have pip installed the tensorflow and then import the packages. 
+
+```
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+import PIL
+import tensorflow as tf
+
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.models import Sequential
+```
+
+<br />
+
+Set up the data path on my local computer so we can access the data for the later usage. 
+
+```
+data_di = "/Users/shenjiajie/Desktop/Duke/823/insects/train"
+```
+
+<br />
+<br />
+
+
+##### Explanation: The following code is to set up the training dataset for the project, and it contains 20% of the total dataset, we will use the training dataset to build up the model and then use the built model to predict on our predicting images.
+
+<br />
+
+```
+
+"""Create training dataset"""
+train_ds = tf.keras.utils.image_dataset_from_directory(
+  data_di,
+  validation_split=0.2,
+  subset="training",
+  seed=2021,
+  image_size=(img_height, img_width),
+  batch_size=batch_size)
+
+
+```
+<br />
+
+##### Explanation: The following code is to set up the validation dataset for the later use of validation. It can give an estimate of model skill while tuning model's hyperparameters.
+
+```
+"""Create validation dataset"""
+val_ds = tf.keras.utils.image_dataset_from_directory(
+  data_di,
+  validation_split=0.2,
+  subset="validation",
+  seed=2021,
+  image_size=(img_height, img_width),
+  batch_size=batch_size)
+
+```
+<br />
+
+##### Explanation: This code is to show how many classes we have in the training datatset, so we can build our deep learning model in a the classes that we have. After running the code, we have following three classes: ['beetles', 'cockroach', 'dragonflies']
+
+
+```
+class_names = train_ds.class_names
+print(class_names)
+```
+<br />
+
+##### Explanation: The follwing code is to select 27 photots from the training dataset, and each of the photo has the attached name with them. In this training dataset we have here, we have beetles' photo will associated with name beetles; cockroach' photo will associated with name cockroach; dragonflies' photo will associated with name dragonflies. So the user of this code can have the basic idea of what is our training dataset images look like. 
+
+```
+"""Generate 27 photos from the training dataset"""
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 10))
+for images, labels in train_ds.take(1):
+  for i in range(27):
+    ax = plt.subplot(3, 9, i + 1)
+    plt.imshow(images[i].numpy().astype("uint8"))
+    plt.title(class_names[labels[i]])
+    plt.axis("off")
+    
+```
+
+![27 images](https://user-images.githubusercontent.com/78027134/141855040-bde8db27-95a3-491e-a3ca-63a72549fba5.png)
+
+
+<br />
+<br />
+
+##### Explanation: The following code is that I build the deep learning model, I need to set up different parameters for each layers in the neural networks. In this way, the deep learning model can classify the 3 different species we have in the training dataset. 
+
+```
+"""Build the deep learning model """
+num_classes = 5
+
+modela = Sequential([
+  layers.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
+  layers.Conv2D(16, 3, padding='same', activation='relu'),
+  layers.MaxPooling2D(),
+  layers.Conv2D(32, 3, padding='same', activation='relu'),
+  layers.MaxPooling2D(),
+  layers.Conv2D(64, 3, padding='same', activation='relu'),
+  layers.MaxPooling2D(),
+  layers.Flatten(),
+  layers.Dense(128, activation='relu'),
+  layers.Dense(num_classes)
+])
+```
+
+<br />
+
+##### Explanation: The following code is that I use to generate the plots that shows the training accuracy and validation accuracy, because I need to make sure the deep learning model is accurate enough. If the model is not accurate, I might need to make some changes on the model in order to make it accurate so our results will be more accurate. Also, I have generated the plots that shows the training loss and validation loss. So that we know that how much accuracy we have lost in the model we have built. 
+
+```
+"""Make the visulization of training results"""
+
+acc = history.history['accuracy']
+val_acc = history.history['val_accuracy']
+
+loss = history.history['loss']
+val_loss = history.history['val_loss']
+
+epochs_range = range(epochs)
+
+plt.figure(figsize=(8, 8))
+plt.subplot(1, 2, 1)
+plt.plot(epochs_range, acc, label='Training Accuracy')
+plt.plot(epochs_range, val_acc, label='Validation Accuracy')
+plt.legend(loc='lower right')
+plt.title('Training and Validation Accuracy')
+
+plt.subplot(1, 2, 2)
+plt.plot(epochs_range, loss, label='Training Loss')
+plt.plot(epochs_range, val_loss, label='Validation Loss')
+plt.legend(loc='upper right')
+plt.title('Training and Validation Loss')
+plt.show()
+
+
+"""The following plots have been generated and we can make interpretation among them"""
+```
+
+
+![accuracy plot](https://user-images.githubusercontent.com/78027134/141855243-853aa6c9-fb8b-4dcd-8518-cdca2f12d5c7.png)
+
+<br />
+
+##### Explanation: In the following code, we are testing the deep learning model I have built, I choose a image from the dragonflies folder, and then I pass the image into the deep learning model to see what will be the result. The result shows "This image most likely belongs to dragonflies with a 99.94 percent confidence", So I know I have a great accuracy on predicting this image. And I have also tried more than 20 images in the other species under beetles and cocroaches, they also have a great accuracy. It turns out I have built a successful deep learning model. 
+
+
+```
+"""Pick a test image from the testing files we have """
+
+ins_path = "/Users/shenjiajie/Desktop/Duke/823/insects/test/dragonflies/5381081.jpg"
+
+"""Here are the functions written to make prediction on the testing image"""
+img = tf.keras.utils.load_img(
+    ins_path, target_size=(img_height, img_width)
+)
+
+
+img_array = tf.keras.utils.img_to_array(img)
+img_array = tf.expand_dims(img_array, 0) # Create a batch
+
+predictions = modela.predict(img_array)
+score = tf.nn.softmax(predictions[0])
+
+print(
+    "This image most likely belongs to {} with a {:.2f} percent confidence."
+    .format(class_names[np.argmax(score)], 100 * np.max(score))
+)
+
+
+```
+
+<br />
+<br />
+
+##### Explanation: And at the very end of the project, I use (SHAP)SHapley Additive exPlanations to explain how the nueral networks to make classification on the images that we build deep learning model on. The follwing code is to calculate the SHAP value of the 5 images from our testing data. The SHAP value that indicate the score for each class are shown below. The rows indicate the test images and the columns are the classes from 0 to 9 going left to right. After runing multiple rounds, the deep learning model can classify images into the correct classification. And the image that shown below can also exaplin the working principal of SHapley Additive exPlanations.
+
+```
+shapv = gra.shap_values(xte[:10])
+
+shap.image_plot([shapv[i] for i in range(5)], x_test[150:155]) 
+
+```
+
+
+![SHAP](https://user-images.githubusercontent.com/78027134/141857623-34612e92-8ac5-4c99-b50d-4f6559e1c37a.png)
+
+
+
+
